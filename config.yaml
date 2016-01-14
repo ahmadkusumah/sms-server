@@ -1,0 +1,26 @@
+path_gammu: C:/Gammu/bin/gammu-smsd-inject
+config_gammu: C:/Gammu/bin/smsdrc
+logging:
+  level: DEBUG
+  loggers:
+    io.dropwizard: DEBUG
+    com.drb: DEBUG
+    org.skife: DEBUG
+  appenders:
+    - type: file
+      currentLogFilename: C:\\SMS\logger.log
+      archivedLogFilenamePattern: C:\\SMS\logger-%d.log.gz
+      archivedFileCount: 5
+    
+server:
+  adminMinThreads: 1
+  adminMaxThreads: 64
+  adminContextPath: /
+  applicationContextPath: /
+  applicationConnectors:
+    - type: http
+      port: 8081
+  adminConnectors:
+    - type: http
+      port: 9081
+
