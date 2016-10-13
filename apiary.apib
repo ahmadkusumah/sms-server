@@ -1,0 +1,324 @@
+FORMAT: 1A
+
+# Offer
+
+Offers is an API for retrieving, creating,  and manipulating wego offers
+
+## Offers Collection [/offers/{?language,country_code,platforms,offers_number}]
+
+Required Parameter :
+ - `language` - selected language
+ - `country_code` - user country code
+ - `platforms` - selected platform , ios or android
+
+Optional Parameter :
+- `offers_number` - Number of Offer wanto displayed
+
+
++ Parameters
+    + language (required, String) - selected language
+    + country_code (required, String) - user country code
+    + platforms (required, String) - selected platforms , ios or android
+    + offers_number(optional, number) - number of offer want to displayed
+
++ Model (application/json)
+
+
+    + Body
+    
+            {
+              "offers": [
+                {
+                  "id": 1,
+                  "title": "10 % off",
+                  "description": "Discount 10 % in holiday season",
+                  "url": "http://offers.one.com",
+                  "started_at": "25-03-2016",
+                  "updated_at": "29-03-2016",
+                  "expired_at": "31-03-2016",
+                  "image_url": "http://cdn.wego.com/promo_one.png",
+                  "provider_logo_url": "http://cdn.wego.com/partner_logo_one.png",
+                  "locales": [
+                    "en"
+                  ],
+                  "site_codes": [
+                    "ID",
+                    "SG"
+                  ],
+                  "platforms": [
+                    "IOS"
+                  ],
+                  "tags": [
+                    {
+                      "id": 1,
+                      "name": "holiday"
+                    },
+                    {
+                      "id": 2,
+                      "name": "summer time"
+                    }
+                  ],
+                  "view_count": 100,
+                  "exclusive": true,
+                  "priority": 5,
+                  "seasonal": false,
+                  "seasonal_description": "Here where seasonal description goes",
+                  "status": "enabled",
+                  "sub_offers_array": [
+                    {
+                      "id": 1,
+                      "title": "10 % off",
+                      "action_url": "http://first.one.com"
+                    },
+                    {
+                      "id": 2,
+                      "title": "10 % off",
+                      "action_url": "http://first.one.com"
+                    }
+                  ]
+                },
+                {
+                  "id": 2,
+                  "title": "20 % off",
+                  "description": "Discount up to 20% for flights on december",
+                  "url": "http://offers.two.com",
+                  "started_at": "30-10-2016",
+                  "updated_at": "30-10-2016",
+                  "expired_at": "31-12-2016",
+                  "image_url": "http://cdn.wego.com/promo_two.png",
+                  "provider_logo_url": "http://cdn.wego.com/partner_logo_two.png",
+                  "locales": [
+                    "en_id"
+                  ],
+                  "site_codes": [
+                    "ios"
+                  ],
+                  "platforms": [
+                    "Android"
+                  ],
+                  "tags": [
+                    {
+                      "id": 1,
+                      "name": "holiday season"
+                    }
+                  ],
+                  "view_count": 1000,
+                  "exclusive": true,
+                  "priority": 2,
+                  "seasonal": false,
+                  "seasonal_description": "Here where seasonal description goes",
+                  "status": "enabled",
+                  "sub_offers_array": [
+                    {
+                      "id": 1,
+                      "title": "20 % off",
+                      "action_url": "http://first.two.com"
+                    }
+                  ]
+                },
+                {
+                  "id": 3,
+                  "title": "Free Baggage Fee",
+                  "description": "Free Baggage fee for booking via wego",
+                  "url": "http://offers.three.com",
+                  "started_at": "30-10-2016",
+                  "updated_at": "30-10-2016",
+                  "expired_at": "31-12-2016",
+                  "image_url": "http://cdn.wego.com/promo_three.png",
+                  "provider_logo_url": "http://cdn.wego.com/partner_logo_three.png",
+                  "locales": [
+                    "en_id"
+                  ],
+                  "site_codes": [
+                    "ID"
+                  ],
+                  "platforms": [
+                    "android",
+                    "ios"
+                  ],
+                  "tags": [
+                    {
+                      "id": 1,
+                      "name": "holiday season"
+                    }
+                  ],
+                  "view_count": 1000,
+                  "exclusive": true,
+                  "priority": 6,
+                  "seasonal": false,
+                  "seasonal_description": "Here where seasonal description goes",
+                  "status": "enabled",
+                  "sub_offers_array": [
+                    {
+                      "id": 1,
+                      "title": "free baggage fee",
+                      "action_url": "http://alternate.three.com"
+                    }
+                  ]
+                }
+              ],
+              "total_offers": 3,
+              "exlusive_offers": 1,
+              "categories": [
+                {
+                  "id": 1,
+                  "name": "flights",
+                  "image_url": "http://cdn.wego.com/promo.png",
+                  "tags": [
+                    {
+                      "id": 1,
+                      "name": "10 % off"
+                    },
+                    {
+                      "id": 2,
+                      "name": "deal for 2"
+                    }
+                  ]
+                },
+                {
+                  "id": 2,
+                  "name": "hotels",
+                  "image_url": "http://cdn.wego.com/promo.png",
+                  "tags": [
+                    {
+                      "id": 1,
+                      "name": "30 % off"
+                    },
+                    {
+                      "id": 2,
+                      "name": "free tv cable"
+                    }
+                  ]
+                }
+              ]
+            }
+
+### List All Offers [GET]
+
++ Response 200 (application/json)
+    
+    [Offers Collection][]
+    
+
+## Offer [/offers/{id}{?language,country_code,platforms}]
+
+Required Parameter :
+- `id` - Offer ID
+- `language` - selected language
+- `country_code` - user country code
+- `platforms` - selected platform , ios or android
+
+
++ Parameter
+    + id (number) - Offer ID
+    + language (required, String) - selected languange
+    + country_code (required, String) - user country code
+    + platforms (required, String) - selected platforms , ios or android
+
++ Model (application/json)
+    
+    + Body
+    
+            {
+                  "id": 1,
+                  "title": "10 % off",
+                  "description": "Discount 10 % in holiday season",
+                  "url": "http://offers.one.com",
+                  "started_at": "25-03-2016",
+                  "updated_at": "29-03-2016",
+                  "expired_at": "31-03-2016",
+                  "image_url": "http://cdn.wego.com/promo_one.png",
+                  "provider_logo_url": "http://cdn.wego.com/partner_logo_one.png",
+                  "locales": [
+                    "en"
+                  ],
+                  "site_codes": [
+                    "ID",
+                    "SG"
+                  ],
+                  "platforms": [
+                    "IOS"
+                  ],
+                  "tags": [
+                    {
+                      "id": 1,
+                      "name": "holiday"
+                    },
+                    {
+                      "id": 2,
+                      "name": "summer time"
+                    }
+                  ],
+                  "view_count": 100,
+                  "exclusive": true,
+                  "priority": 5,
+                  "seasonal": false,
+                  "seasonal_description": "Here where seasonal description goes",
+                  "status": "enabled",
+                  "sub_offers_array": [
+                    {
+                      "id": 1,
+                      "title": "10 % off",
+                      "action_url": "http://first.one.com"
+                    },
+                    {
+                      "id": 2,
+                      "title": "10 % off",
+                      "action_url": "http://first.one.com"
+                    }
+                  ]
+            }
+        
+### Get Single Offer [GET]
+
++ Response 200 (application/json)
+    
+    [Offer][]
+    
+
+##Category Collections [/offers/categories]
+Retrieve and manipulating category
+
++ Model (application/json)
+
+    + Body
+           {
+              "categories": [
+                {
+                  "id": 1,
+                  "name": "flights",
+                  "image_url": "http://cdn.wego.com/promo.png",
+                  "tags": [
+                    {
+                      "id": 1,
+                      "name": "10 % off"
+                    },
+                    {
+                      "id": 2,
+                      "name": "deal for 2"
+                    }
+                  ]
+                },
+                {
+                  "id": 2,
+                  "name": "hotels",
+                  "image_url": "http://cdn.wego.com/promo.png",
+                  "tags": [
+                    {
+                      "id": 1,
+                      "name": "30 % off"
+                    },
+                    {
+                      "id": 2,
+                      "name": "free tv cable"
+                    }
+                  ]
+                }
+              ]
+            } 
+    
+
+###List Categories [GET]
++ Response 200 (application/json)
+
+    [Category Collections][]
