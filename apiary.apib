@@ -1,28 +1,39 @@
 FORMAT: 1A
 
-# Offer
+# Offers
 
 Offers is an API for retrieving, creating,  and manipulating wego offers
 
-## Offers Collection [/offers/{?language,country_code,platforms,offers_number}]
+## Offers Collection [/offers/offers/{?language,site_code,app_type,device_type,page,per_page}]
+
+Required Header:
+- `X-Wego-Version` - Api version, value always 1
 
 Required Parameter :
  - `language` - selected language
- - `country_code` - user country code
- - `platforms` - selected platform , ios or android
+ - `site_code` - user country code
+ - `app_type` - selected apps type , ios or android
+ - `device_type` - selected device, table, mobile or desktop
 
 Optional Parameter :
-- `offers_number` - Number of Offer wanto displayed
+- `page` - page number (default will be page 1, with 10 record per page)
+- `per_page` - number of displayed record per page
 
 
 + Parameters
     + language (required, String) - selected language
-    + country_code (required, String) - user country code
-    + platforms (required, String) - selected platforms , ios or android
-    + offers_number(optional, number) - number of offer want to displayed
+    + site_code (required, String) - user country code
+    + app_type (required, String) - selected platforms , ios or android
+    + device_type (required, String) - selected platforms , ios or android
+    + page(optional, number) -  page number
+    + per_page - number of displayed record per page
 
-+ Model (application/json)
++ Model
 
+    + Headers
+    
+            Content-Type: application/json
+            X-Wego-Version: 1
 
     + Body
     
@@ -32,22 +43,12 @@ Optional Parameter :
                   "id": 1,
                   "title": "10 % off",
                   "description": "Discount 10 % in holiday season",
-                  "url": "http://offers.one.com",
-                  "started_at": "25-03-2016",
-                  "updated_at": "29-03-2016",
-                  "expired_at": "31-03-2016",
-                  "image_url": "http://cdn.wego.com/promo_one.png",
-                  "provider_logo_url": "http://cdn.wego.com/partner_logo_one.png",
-                  "locales": [
-                    "en"
-                  ],
-                  "site_codes": [
-                    "ID",
-                    "SG"
-                  ],
-                  "platforms": [
-                    "IOS"
-                  ],
+                  "landing_url": "http://offers.one.com",
+                  "start_date": "25-03-2016",
+                  "expiry_date": "31-03-2016",
+                  "offer_image_url": "http://cdn.wego.com/promo_one.png",
+                  "provider_name": "Qatar",
+                  "provider_logo_image_url": "http://cdn.wego.com/partner_logo_one.png",
                   "tags": [
                     {
                       "id": 1,
@@ -64,16 +65,16 @@ Optional Parameter :
                   "seasonal": false,
                   "seasonal_description": "Here where seasonal description goes",
                   "status": "enabled",
-                  "sub_offers_array": [
+                  "sub_offers": [
                     {
                       "id": 1,
                       "title": "10 % off",
-                      "action_url": "http://first.one.com"
+                      "landing_url": "http://first.one.com"
                     },
                     {
                       "id": 2,
                       "title": "10 % off",
-                      "action_url": "http://first.one.com"
+                      "landing_url": "http://first.one.com"
                     }
                   ]
                 },
@@ -81,21 +82,12 @@ Optional Parameter :
                   "id": 2,
                   "title": "20 % off",
                   "description": "Discount up to 20% for flights on december",
-                  "url": "http://offers.two.com",
-                  "started_at": "30-10-2016",
-                  "updated_at": "30-10-2016",
-                  "expired_at": "31-12-2016",
-                  "image_url": "http://cdn.wego.com/promo_two.png",
-                  "provider_logo_url": "http://cdn.wego.com/partner_logo_two.png",
-                  "locales": [
-                    "en_id"
-                  ],
-                  "site_codes": [
-                    "ios"
-                  ],
-                  "platforms": [
-                    "Android"
-                  ],
+                  "landing_url": "http://offers.two.com",
+                  "start_date": "30-10-2016",
+                  "expiry_date": "31-12-2016",
+                  "offer_image_url": "http://cdn.wego.com/promo_two.png",
+                  "provider_name": "Qatar",
+                  "provider_logo_image_url": "http://cdn.wego.com/partner_logo_two.png",
                   "tags": [
                     {
                       "id": 1,
@@ -108,11 +100,11 @@ Optional Parameter :
                   "seasonal": false,
                   "seasonal_description": "Here where seasonal description goes",
                   "status": "enabled",
-                  "sub_offers_array": [
+                  "sub_offers": [
                     {
                       "id": 1,
                       "title": "20 % off",
-                      "action_url": "http://first.two.com"
+                      "landing_url": "http://first.two.com"
                     }
                   ]
                 },
@@ -120,22 +112,13 @@ Optional Parameter :
                   "id": 3,
                   "title": "Free Baggage Fee",
                   "description": "Free Baggage fee for booking via wego",
-                  "url": "http://offers.three.com",
-                  "started_at": "30-10-2016",
+                  "landing_url": "http://offers.three.com",
+                  "start_date": "30-10-2016",
                   "updated_at": "30-10-2016",
-                  "expired_at": "31-12-2016",
-                  "image_url": "http://cdn.wego.com/promo_three.png",
-                  "provider_logo_url": "http://cdn.wego.com/partner_logo_three.png",
-                  "locales": [
-                    "en_id"
-                  ],
-                  "site_codes": [
-                    "ID"
-                  ],
-                  "platforms": [
-                    "android",
-                    "ios"
-                  ],
+                  "expiry_date": "31-12-2016",
+                  "offer_image_url": "http://cdn.wego.com/promo_three.png",
+                  "provider_name": "Qatar",
+                  "provider_logo_image_url": "http://cdn.wego.com/partner_logo_three.png",
                   "tags": [
                     {
                       "id": 1,
@@ -148,45 +131,11 @@ Optional Parameter :
                   "seasonal": false,
                   "seasonal_description": "Here where seasonal description goes",
                   "status": "enabled",
-                  "sub_offers_array": [
+                  "sub_offers": [
                     {
                       "id": 1,
                       "title": "free baggage fee",
-                      "action_url": "http://alternate.three.com"
-                    }
-                  ]
-                }
-              ],
-              "total_offers": 3,
-              "exlusive_offers": 1,
-              "categories": [
-                {
-                  "id": 1,
-                  "name": "flights",
-                  "image_url": "http://cdn.wego.com/promo.png",
-                  "tags": [
-                    {
-                      "id": 1,
-                      "name": "10 % off"
-                    },
-                    {
-                      "id": 2,
-                      "name": "deal for 2"
-                    }
-                  ]
-                },
-                {
-                  "id": 2,
-                  "name": "hotels",
-                  "image_url": "http://cdn.wego.com/promo.png",
-                  "tags": [
-                    {
-                      "id": 1,
-                      "name": "30 % off"
-                    },
-                    {
-                      "id": 2,
-                      "name": "free tv cable"
+                      "landing_url": "http://alternate.three.com"
                     }
                   ]
                 }
@@ -195,130 +144,330 @@ Optional Parameter :
 
 ### List All Offers [GET]
 
-+ Response 200 (application/json)
++ Response 200
     
     [Offers Collection][]
     
 
-## Offer [/offers/{id}{?language,country_code,platforms}]
+## Offer [/offers/offers/{id}{?language,site_code,app_type,device_type}]
+
+Required Header:
+- `X-Wego-Version` - Api version, value always 1
 
 Required Parameter :
 - `id` - Offer ID
 - `language` - selected language
-- `country_code` - user country code
-- `platforms` - selected platform , ios or android
+- `site_code` - user country code
+- `app_type` - selected apps type , ios or android
+- `device_type` - selected device, table, mobile or desktop
 
 
 + Parameter
     + id (number) - Offer ID
-    + language (required, String) - selected languange
-    + country_code (required, String) - user country code
-    + platforms (required, String) - selected platforms , ios or android
+    + language (required, String) - selected language
+    + site_code (required, String) - user country code
+    + app_type (required, String) - selected platforms , ios or android
+    + device_type (required, String) - selected platforms , ios or android
 
-+ Model (application/json)
++ Model
+
+    + Headers
+    
+            Content-Type: application/json
+            X-Wego-Version: 1
     
     + Body
     
             {
-                  "id": 1,
-                  "title": "10 % off",
-                  "description": "Discount 10 % in holiday season",
-                  "url": "http://offers.one.com",
-                  "started_at": "25-03-2016",
-                  "updated_at": "29-03-2016",
-                  "expired_at": "31-03-2016",
-                  "image_url": "http://cdn.wego.com/promo_one.png",
-                  "provider_logo_url": "http://cdn.wego.com/partner_logo_one.png",
-                  "locales": [
-                    "en"
-                  ],
-                  "site_codes": [
-                    "ID",
-                    "SG"
-                  ],
-                  "platforms": [
-                    "IOS"
-                  ],
-                  "tags": [
-                    {
-                      "id": 1,
-                      "name": "holiday"
-                    },
-                    {
-                      "id": 2,
-                      "name": "summer time"
-                    }
-                  ],
-                  "view_count": 100,
-                  "exclusive": true,
-                  "priority": 5,
-                  "seasonal": false,
-                  "seasonal_description": "Here where seasonal description goes",
-                  "status": "enabled",
-                  "sub_offers_array": [
-                    {
-                      "id": 1,
-                      "title": "10 % off",
-                      "action_url": "http://first.one.com"
-                    },
-                    {
-                      "id": 2,
-                      "title": "10 % off",
-                      "action_url": "http://first.one.com"
-                    }
-                  ]
+              "offer": {
+                "id": 1,
+                "title": "15% OFF + Resort Credit up to AED 400 from Anantara",
+                "description": "Anantara The Palm Dubai Resort offers 15% OFF on the room PLUS Resort Credit up to AED 400. Immerse yourself in our prestigious Dubai beachfront retreat, with exceptional rates for one of a kind luxury, including breakfast every day on us. Experience the first and only Thai inspired Over Water Villas in the UAE, exclusively at Anantara The Palm Dubai Resort. Wake up to dazzling sea views, catch a glimpse of the enchanting underwater. Wake up to dazzling sea views, catch a glimpse of the enchanting underwater world through your villa's glass viewing panel and watch the mesmerising sunset from your private deck that extends over the crystal clear waters. This Over Water Villa Special also treats you to a delicious buffet breakfast in Crescendo with a vista of the Arabian Gulf and Dubai’s stunning coastline.\r\n\r\nPACKAGE INCLUDES:\r\n\r\nUp to 30% savings on accommodation in a One Bedroom Over Water Villa\r\nDaily buffet breakfast for two people\r\n\r\nNOW – 21 DECEMBER 2017",
+                "landing_url": "http://dubai-palm.anantara.com/gallery.aspx",
+                "start_date": "2016-10-17",
+                "expiry_date": "2016-10-31",
+                "offer_image_url": "http://res.cloudinary.com/wego/image/upload/v1476700656/Wego%20Offers/Anantara-Image.png",
+                "provider_logo_image_url": "http://res.cloudinary.com/wego/image/upload/v1476700653/Wego%20Offers/Anantara-logo.png",
+                "locales": "[\"ar\",\"en\"]",
+                "site_codes": "[\"AE\",\"SA\",\"SG\"]",
+                "app_types": "[\"ios\",\"android\"]",
+                "device_types": "[\"desktop\",\"mobile\",\"tablet\"]",
+                "view_count": null,
+                "exclusive": true,
+                "priority": 2,
+                "seasonal": true,
+                "seasonal_description": "Christmas",
+                "status": "enabled",
+                "tags": [
+                  {
+                    "id": 9,
+                    "name": "Anantara"
+                  },
+                  {
+                    "id": 10,
+                    "name": "15% off"
+                  },
+                  {
+                    "id": 11,
+                    "name": "resort credit"
+                  },
+                  {
+                    "id": 12,
+                    "name": "complimentary breakfast"
+                  },
+                  {
+                    "id": 10,
+                    "name": "15% off"
+                  }
+                ],
+                "sub_offers": [
+                  {
+                    "id": 1,
+                    "title": "Desert Islands Resort & Spa by Anantara starting AED 1080",
+                    "landing_url": "http://sir-bani-yas-island.anantara.com/rooms.aspx#desert-islands"
+                  },
+                  {
+                    "id": 2,
+                    "title": "Anantara The Palm Dubai Resort starting AED 1120",
+                    "landing_url": "http://dubai-palm.anantara.com/"
+                  },
+                  {
+                    "id": 3,
+                    "title": "Qasr Al Sarab Desert Resort by Anantara starting AED 1200",
+                    "landing_url": "http://qasralsarab.anantara.com/"
+                  }
+                ]
+              }
             }
         
 ### Get Single Offer [GET]
 
-+ Response 200 (application/json)
++ Response 200
     
     [Offer][]
     
 
-##Category Collections [/offers/categories]
-Retrieve and manipulating category
+##Category Collections [/offers/categories{?page,per_page}]
+Retrieve Categories
 
-+ Model (application/json)
+Required Header:
+- `X-Wego-Version` - Api version, value always 1
+
++ Parameter
+    + page(optional, number) -  page number
+    + per_page - number of displayed record per page
+
++ Model
+
+    + Headers
+    
+            Content-Type: application/json
+            X-Wego-Version: 1
 
     + Body
-           {
-              "categories": [
-                {
-                  "id": 1,
-                  "name": "flights",
-                  "image_url": "http://cdn.wego.com/promo.png",
-                  "tags": [
+    
+               {
+                  "categories": [
                     {
                       "id": 1,
-                      "name": "10 % off"
+                      "name": "flights",
+                      "image_url": "http://cdn.wego.com/promo.png",
+                      "selection_color": "#0000000",
+                      "tags": [
+                        {
+                          "id": 1,
+                          "name": "10 % off"
+                        },
+                        {
+                          "id": 2,
+                          "name": "deal for 2"
+                        }
+                      ]
                     },
                     {
                       "id": 2,
-                      "name": "deal for 2"
+                      "name": "hotels",
+                      "image_url": "http://cdn.wego.com/promo.png",
+                      "selection_color": "#0000000",
+                      "tags": [
+                        {
+                          "id": 1,
+                          "name": "30 % off"
+                        },
+                        {
+                          "id": 2,
+                          "name": "free tv cable"
+                        }
+                      ]
                     }
                   ]
-                },
-                {
-                  "id": 2,
-                  "name": "hotels",
-                  "image_url": "http://cdn.wego.com/promo.png",
-                  "tags": [
-                    {
-                      "id": 1,
-                      "name": "30 % off"
-                    },
-                    {
-                      "id": 2,
-                      "name": "free tv cable"
-                    }
-                  ]
-                }
-              ]
-            } 
+                } 
     
 
 ###List Categories [GET]
-+ Response 200 (application/json)
++ Response 200
 
     [Category Collections][]
+    
+
+## Category [/offers/category/{id}]
+
+Required Header:
+- `X-Wego-Version` - Api version, value always 1
+
+Required Parameter :
+- `id` - category ID
+
++ Parameter
+    + id (required, number) - Category ID
+
++ Model
+
+    + Headers
+    
+            Content-Type: application/json
+            X-Wego-Version: 1
+    
+    + Body
+    
+            {
+              "category": {
+                "id": 1,
+                "name": "frequent flyer",
+                "image_url": "http://res.cloudinary.com/wego/image/upload/v1476701206/Wego%20Offers/frequent_flyer_icon.png",
+                "selection_color": "#000000",
+                "tags": [
+                  {
+                    "id": 1,
+                    "name": "20 % Off"
+                  },
+                  {
+                    "id": 2,
+                    "name": "Free Baggage Fee"
+                  }
+                ]
+              }
+            }
+            
+### Get Category By ID [GET]
++ Response 200
+
+    [Category][]
+
+
+##Autentication [/wego/users/oauth/token]
+For Generating Bearer Token, currently using hkakabo. 
+Please See Hkakabo Documentation.
+
+##Usertag Collections [/users/users]
+For retrieving user references, including tags and contact
+
+Required Header:
+- `X-Wego-Version` - Api version, value always 1
+- `acces_token` - Generated Token from auth token
+
++ Attributes
+    + user_id (required, string) - user id
+    + tags (required, array) - user tags references
+    
++ Model
+
+    + Header
+        
+            Content-Type: application/json
+            X-Wego-version: 1
+            Authorization: Bearer <token>
+        
+    + Body
+    
+            {
+              "user": {
+                "user_id": 1129874,
+                "identity": null,
+                "contacts": [
+                  {
+                    "id": 51,
+                    "full_name": "Yagi Anggar",
+                    "email": "yagi@wego.com",
+                    "phone_country_code": "+65",
+                    "phone_number": "1234567"
+                  }
+                ],
+                "tags": [
+                  {
+                    "id": 1,
+                    "name": "20 % Off"
+                  },
+                  {
+                    "id": 2,
+                    "name": "Free Baggage Fee"
+                  }
+                ]
+              }
+            }
+    
+### Get User tags references [GET]
++ Response 200
+
+    [Usertag Collections][]
+
+
+##Create Update Usertags [/users/user_tags]
+
+Create / replace user tags
+
+Required Header:
+- `X-Wego-Version` - Api version, value always 1
+- `token` - Generated Token from auth token
+
++ Attributes
+    + tag_ids (required, array) - user tags references
+
+
+### Create / Update / Replace User tags [POST]
+
++ Request
+
+    + Header
+    
+            Content-Type: application/json
+            X-Wego-Version: 1
+            Authorization: Bearer adsadasd
+    
+    + Body
+    
+            {
+                "tag_ids" : [2, 3, 4]
+            }
+            
++ Response 201 (application/json)
+
+            {
+              "user": {
+                "user_id": 1129874,
+                "identity": null,
+                "contacts": [
+                  {
+                    "id": 51,
+                    "full_name": "Yagi Anggar",
+                    "email": "yagi@wego.com",
+                    "phone_country_code": "+65",
+                    "phone_number": "1234567"
+                  }
+                ],
+                "tags": [
+                  {
+                    "id": 2,
+                    "name": "Free Baggage Fee"
+                  },
+                  {
+                    "id": 3,
+                    "name": "10% off"
+                  },
+                  {
+                    "id": 4,
+                    "name": "promo code"
+                  }
+                ]
+              }
+            }
