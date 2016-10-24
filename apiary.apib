@@ -4,7 +4,7 @@ FORMAT: 1A
 
 Offers is an API for retrieving, creating,  and manipulating wego offers
 
-## Offers Collection [/offers/offers/{?language,site_code,app_type,device_type,page,per_page}]
+## Offers Collection [/offers/offers/{?language,site_code,app_type,device_type,page,per_page,send_historical_tags}]
 
 Required Header:
 - `X-Wego-Version` - Api version, value always 1
@@ -13,11 +13,12 @@ Required Parameter :
  - `language` - selected language
  - `site_code` - user country code
  - `app_type` - selected apps type , ios or android
- - `device_type` - selected device, table, mobile or desktop
+ - `device_type` - selected device, table, mobile or 
 
 Optional Parameter :
-- `page` - page number (default will be page 1, with 10 record per page)
+- `page` - page number (default will be page 1, with 100 record per page)
 - `per_page` - number of displayed record per page
+- `send_historical_tags` - default 0
 
 
 + Parameters
@@ -27,6 +28,7 @@ Optional Parameter :
     + device_type (required, String) - selected platforms , ios or android
     + page(optional, number) -  page number
     + per_page - number of displayed record per page
+    + send_historical_tags - show categories and tags in offers list endpoint
 
 + Model
 
@@ -247,13 +249,27 @@ Required Parameter :
     [Offer][]
     
 
-##Category Collections [/offers/categories{?page,per_page}]
+##Category Collections [/offers/categories{?language,site_code,app_type,device_type,page,per_page}]
 Retrieve Categories
 
 Required Header:
 - `X-Wego-Version` - Api version, value always 1
 
+Required Parameter :
+- `language` - selected language
+- `site_code` - user country code
+- `app_type` - selected apps type , ios or android
+- `device_type` - selected device, table, mobile or desktop
+
+Optional Parameter :
+- `page` - page number (default will be page 1, with 100 record per page)
+- `per_page` - number of displayed record per page
+
 + Parameter
+    + language (required, String) - selected language
+    + site_code (required, String) - user country code
+    + app_type (required, String) - selected platforms , ios or android
+    + device_type (required, String) - selected platforms , ios or android
     + page(optional, number) -  page number
     + per_page - number of displayed record per page
 
@@ -310,16 +326,24 @@ Required Header:
     [Category Collections][]
     
 
-## Category [/offers/category/{id}]
+## Category [/offers/category/{id}{?language,site_code,app_type,device_type}]
 
 Required Header:
 - `X-Wego-Version` - Api version, value always 1
 
 Required Parameter :
 - `id` - category ID
+- `language` - selected language
+- `site_code` - user country code
+- `app_type` - selected apps type , ios or android
+- `device_type` - selected device, table, mobile or desktop
 
 + Parameter
     + id (required, number) - Category ID
+    + language (required, String) - selected language
+    + site_code (required, String) - user country code
+    + app_type (required, String) - selected platforms , ios or android
+    + device_type (required, String) - selected platforms , ios or android
 
 + Model
 
@@ -359,12 +383,26 @@ Required Parameter :
 For Generating Bearer Token, currently using hkakabo. 
 Please See Hkakabo Documentation.
 
-##Usertag Collections [/users/users]
+
+
+##Usertag Collections [/users/users{?language,site_code,app_type,device_type}]
 For retrieving user references, including tags and contact
 
 Required Header:
 - `X-Wego-Version` - Api version, value always 1
 - `acces_token` - Generated Token from auth token
+
+Required Parameter :
+- `language` - selected language
+- `site_code` - user country code
+- `app_type` - selected apps type , ios or android
+- `device_type` - selected device, table, mobile or desktop
+
++ Parameter
+    + language (required, String) - selected language
+    + site_code (required, String) - user country code
+    + app_type (required, String) - selected platforms , ios or android
+    + device_type (required, String) - selected platforms , ios or android
 
 + Attributes
     + user_id (required, string) - user id
