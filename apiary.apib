@@ -9,6 +9,10 @@ Offers is an API for retrieving, creating,  and manipulating wego offers
 Required Header:
 - `X-Wego-Version` - Api version, value always 1
 
+Response Header:
+- `X-Total-Offers` - Total displayed Offers 
+- `X-Exclusive-Offers` - Total Exclusive displayed Offers 
+
 Required Parameter :
  - `language` - selected language
  - `site_code` - user country code
@@ -18,7 +22,6 @@ Required Parameter :
 Optional Parameter :
 - `page` - page number (default will be page 1, with 100 record per page)
 - `per_page` - number of displayed record per page
-- `send_historical_tags` - default 0
 
 
 + Parameters
@@ -28,7 +31,7 @@ Optional Parameter :
     + device_type (required, String) - selected platforms , ios or android
     + page(optional, number) -  page number
     + per_page - number of displayed record per page
-    + send_historical_tags - show categories and tags in offers list endpoint
+
 
 + Model
 
@@ -36,6 +39,8 @@ Optional Parameter :
     
             Content-Type: application/json
             X-Wego-Version: 1
+            X-Total-Offers: 9
+            X-Exclusive-Offers: 5
 
     + Body
     
